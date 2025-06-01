@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>User Dashboard</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f3f4f6;
+      color: #333;
+      padding: 2rem;
+      display: flex;
+      justify-content: center;
+    }
+
+    .container {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 12px;
+      max-width: 600px;
+      width: 100%;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      color: #111827;
+    }
+
+    textarea {
+      width: 95%;
+      height: 100px;
+      padding: 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      resize: vertical;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 95%;
+      padding: 0.75rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    input[type="submit"] {
+      padding: 0.75rem 1.5rem;
+      background-color: #4f46e5;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #4338ca;
+    }
+
+    a {
+      color: #4f46e5;
+      text-decoration: none;
+      font-weight: 500;
+      margin-right: 1rem;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    form {
+      margin-bottom: 1.5rem;
+    }
+
+    .server_response {
+        margin-bottom: 1em;
+        color: green
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Welcome, {{ username }}</h1>
+    <a href="/admin">Admin Panel</a> |
+    <a href="/logout">Logout</a>
+
+    <hr style="margin: 2rem 0; border: none; border-top: 1px solid #ddd;" />
+
+    <form action="/users" method="post">
+      <input type="text" name="username" placeholder="Enter username" />
+      <input type="submit" value="Find User" />
+    </form>
+
+    <hr style="margin: 2rem 0; border: none; border-top: 1px solid #ddd;" />
+
+    <form method="post">
+      <textarea name="comment" placeholder="Say something..."></textarea>
+      {% if comment %}
+      <div class="server_response">{{ comment }}</div>
+      {% endif %}
+      <input type="submit" value="Post Comment" />
+    </form>
+
+    <hr style="margin: 2rem 0; border: none; border-top: 1px solid #ddd;" />
+
+    <form action="/change_password" method="post">
+      <input type="text" name="new_password" placeholder="New Password" />
+      <input type="submit" value="Change Password" />
+    </form>
+  </div>
+  
+</body>
+</html>
