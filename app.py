@@ -48,7 +48,7 @@ def dashboard():
     if request.method == 'POST':
         # XSS vulnerability
         comment = request.form['comment']
-        return render_template('dashboard.html', username=session['username'], comment=f"Your Comment: {comment} ")
+        return f"<h2>Your Comment:</h2><p>{comment}</p>"
     return render_template('dashboard.html', username=session['username'])
 
 @app.route('/admin')
