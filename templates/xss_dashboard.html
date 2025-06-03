@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>XSS Dashboard</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f3f4f6;
+      color: #333;
+      padding: 2rem;
+      display: flex;
+      justify-content: center;
+    }
+
+    .container {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 12px;
+      max-width: 600px;
+      width: 100%;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      margin-bottom: 1.5rem;
+      color: #111827;
+    }
+
+    textarea {
+      width: 95%;
+      height: 100px;
+      padding: 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      resize: vertical;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    input[type="submit"] {
+      padding: 0.75rem 1.5rem;
+      background-color: #4f46e5;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #4338ca;
+    }
+
+    form {
+      margin-bottom: 1.5rem;
+    }
+
+    .comments-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    }
+
+    .comments-table th,
+    .comments-table td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+    }
+
+    .comments-table thead {
+    background-color: #f9fafb;
+    font-weight: 600;
+    color: #374151;
+    }
+
+    .comments-table tbody tr:hover {
+    background-color: #f1f5f9;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2 id="reflectedTitle">XSS Reflected</h2>
+
+    <form method="post">
+      <textarea id="userComment" name="comment" placeholder="Say something..."></textarea>
+      {% if comment %}
+      <div class="server_response">{{ comment | safe }}</div>
+      {% endif %}
+      <input id="userCommentBtn" type="submit" value="Post Comment" />
+    </form>
+
+    <hr style="margin: 2rem 0; border: none; border-top: 1px solid #ddd;" />
+
+    <h2 id="storedTitle">XSS Stored</h2>
+
+    <form action="/blog" method="post">
+      <textarea id="userInput" name="userInput" placeholder="Say something..."></textarea>
+      <input id="userInputBtn" type="submit" value="Post Comment" />
+    </form>
+
+    <hr style="margin: 2rem 0; border: none; border-top: 1px solid #ddd;" />
+    <table class="comments-table">
+        <thead>
+            <tr>
+            <th>Comment</th>
+            <th>Created At</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in stored_comments %}
+            <tr>
+            <td>{{ row.comment | safe }}</td>
+            <td>{{ row.created_at }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <hr style="margin: 2rem 0; border: none; border-top: 1px solid #ddd;" />
+
+    <form action="/reset" method="post">
+      <input id="resetBtn" type="submit" value="Reset Data" />
+    </form>
+
+  </div>
+  
+</body>
+</html>

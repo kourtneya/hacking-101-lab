@@ -29,17 +29,6 @@
       color: #111827;
     }
 
-    textarea {
-      width: 95%;
-      height: 100px;
-      padding: 0.75rem;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      resize: vertical;
-      font-size: 1rem;
-      margin-bottom: 1rem;
-    }
-
     input[type="text"],
     input[type="password"] {
       width: 95%;
@@ -79,17 +68,12 @@
     form {
       margin-bottom: 1.5rem;
     }
-
-    .server_response {
-        margin-bottom: 1em;
-        color: green
-    }
+    
   </style>
 </head>
 <body>
   <div class="container">
     <h1>Welcome, {{ username }}</h1>
-    <a href="/admin">Admin Panel</a> |
     <a href="/logout">Logout</a>
 
     <hr style="margin: 2rem 0; border: none; border-top: 1px solid #ddd;" />
@@ -97,16 +81,6 @@
     <form action="/users" method="post">
       <input type="text" name="username" placeholder="Enter username" />
       <input type="submit" value="Find User" />
-    </form>
-
-    <hr style="margin: 2rem 0; border: none; border-top: 1px solid #ddd;" />
-
-    <form method="post">
-      <textarea name="comment" placeholder="Say something..."></textarea>
-      {% if comment %}
-      <div class="server_response">{{ comment }}</div>
-      {% endif %}
-      <input type="submit" value="Post Comment" />
     </form>
 
     <hr style="margin: 2rem 0; border: none; border-top: 1px solid #ddd;" />

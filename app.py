@@ -51,13 +51,6 @@ def dashboard():
         return f"<h2>Your Comment:</h2><p>{comment}</p>"
     return render_template('dashboard.html', username=session['username'])
 
-@app.route('/admin')
-def admin():
-    # Broken Access Control
-    if not session.get('is_admin'):
-        return render_template('admin.html', access_status="Access Denied")
-    return render_template('admin.html')
-
 @app.route('/change_password', methods=['POST'])
 def change_password():
     # CSRF Vulnerability
