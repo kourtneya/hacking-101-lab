@@ -18,7 +18,7 @@ def dashboard():
     stored_comments = get_comments()
     if request.method == 'POST':
         comment = request.form['comment']
-        return render_template('xss_dashboard.html', comment=f"<h2>Your Comment:</h2><p>{comment}</p>", stored_comments=stored_comments)
+        return render_template('xss_dashboard.html', comment=f"<p><b>Your Comment:</b> {comment}</p>", stored_comments=stored_comments)
     return render_template('xss_dashboard.html', stored_comments=stored_comments)
 
 @app.route('/blog', methods=['GET', 'POST'])
