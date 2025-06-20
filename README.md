@@ -26,7 +26,7 @@ For a better lab guide experience perform the following steps. Docker is require
 
 2. Execute the docker run command, in a 
     ```bash
-    docker run -d --name gh_action_lab -p 8086:8000 ghcr.io/kourtneya/ghaction-lab-guide:latest
+    docker run -d --name gh_action_lab -p 8086:8000 ghcr.io/kourtneya/hacking-101-lab-guide:latest
     ```
 
 3. Navigate to [http://localhost:8086](http://localhost:8086) in your web browser of choice
