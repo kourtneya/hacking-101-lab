@@ -15,6 +15,23 @@ Upon completion of this lab, you will be able to:
 - Exploit basic real-world like vulnerabilities in a controlled environment
 - Learn how to mitigate these attacks through best practices
 
+
+## Interactive Lab Guide
+For a better lab guide experience perform the following steps. Docker is required for this experience 
+
+1. Open a terminal window
+    - **MacOS:** Press the Command & Space buttons on the keyboard, type `Terminal` and press enter
+
+    - **Windows:** Click the `Start` button *(usually Windows icon)* at the bottom left corner of the screen. Type `cmd` and press enter
+
+2. Execute the docker run command, in a 
+    ```bash
+    docker run -d --name gh_action_lab -p 8086:8000 ghcr.io/kourtneya/ghaction-lab-guide:latest
+    ```
+
+3. Navigate to [http://localhost:8086](http://localhost:8086) in your web browser of choice
+
+
 ## Scenarios
 In this lab, you will step into the role of both an ethical hacker and a defender as you explore attacking common web application vulnerabilities in a controlled environment. You will be guided through tasks and steps where you will learn how attackers exploit SQL injection to bypass login forms and extract user data, inject malicious JavaScript via Cross-Site Scripting (XSS), and perform Cross-Site Request Forgery (CSRF) attacks to trick users into making unintended changes. Each attack is paired with practical defense strategies, equipping you to identify, exploit, and fix these common web application flows
 
@@ -46,11 +63,11 @@ In this lab, you'll simulate real-world attack scenarios on a deliberate insecur
 
 2. On the homepage of the repository, click the green button that's labeled **Code**
     
-        ![](./assets/github_code_btn.png){ width="880" }
+        ![](./lab-guide/docs/assets/github_code_btn.png){ width="880" }
 
 3. Download the codebase using one of the following options from the drop down menu
     
-        ![](./assets/github_code_menu.png){ width="400" }
+        ![](./lab-guide/docs/assets/github_code_menu.png){ width="400" }
 
     - **Zip File**
         - Click **`Download Zip`** and save on the Desktop
@@ -90,7 +107,7 @@ In Python, it is best practice to create a virtual environment. A virtual enviro
 2. A Terminal window will appear at the bottom of VS Code, at the project's path
     - To test that the terminal is at the projects path, type `pwd` and press enter in the terminal window
     
-    ![](./assets/vs_pwd_terminal.png){ width="800" }
+    ![](./lab-guide/docs/assets/vs_pwd_terminal.png){ width="800" }
     
 
 3. Enter the following command to create the virtual environment 
@@ -142,7 +159,7 @@ Press CTRL+C to quit
 ## Step 5: Visit the Vulnerable Web Application in Web Browser
 Now that the application is running you can now visit the application in your web browser of choice by clicking [http://localhost:8088](http://localhost:8088) or typing the url in the web browser. 
 
-![](./assets/web_app.png){ width="600" }
+![](./lab-guide/docs/assets/web_app.png){ width="600" }
 
 ## Optional: Scan for Vulnerabilities 
 >**IMPORTANT:** If using the provided workstations at Cisco Live, please skip this step as the workstations do not have the tools installed to perform vulnerability scanning.
@@ -204,7 +221,7 @@ Before you begin exploiting the login page, login to the Vulnerable Web applicat
 
 1. Navigate to the Vulnerable Web Application by clicking this hyperlink [http://localhost:8088](http://localhost:8088) or by typing this url in your Web Browser of choice
 
-    ![](./assets/web_app.png){ width="400" }
+    ![](./lab-guide/docs/assets/web_app.png){ width="400" }
     
 
 2. Provide one of the following credentials to login to the application
@@ -216,7 +233,7 @@ Before you begin exploiting the login page, login to the Vulnerable Web applicat
         - **Password**: `pass`
 
     
-    ![](./assets/web_app_dashboard.png){ width="400" }
+    ![](./lab-guide/docs/assets/web_app_dashboard.png){ width="400" }
     
 
 ### Step 2: Bypass Login 
@@ -228,7 +245,7 @@ Now that you have successfully logged in with a known user and password. Try exp
     - **Username**: `' OR 1=1--`
     - **Password**: Type, anything as it's irrelevant
 
-    ![](./assets/web_app_login_exploit.png){ width="400" }
+    ![](./lab-guide/docs/assets/web_app_login_exploit.png){ width="400" }
     
 
 ### Step 3: Login Attack Root Cause
@@ -285,7 +302,7 @@ First find the `admin` or `user` user to ensure you are receiving the expected r
 In the dashboard page, enter `admin` or `user` then press the `Find User` button
 
 
-![](./assets/find_user_normal.png){ width="400" }
+![](./lab-guide/docs/assets/find_user_normal.png){ width="400" }
 
 
 ### Step 2: Find All Users
@@ -294,7 +311,7 @@ Perform a SQL Injection attack to find all users in the database.
 1. In the dashboard page, enter `' OR 1=1--`, to retrieve a list of all users
 
 
-![](./assets/find_users_all.png){ width="400" }
+![](./lab-guide/docs/assets/find_users_all.png){ width="400" }
 
 
 2. Entering `' OR 1=1--` has the same affect as it did for bypassing the login.
@@ -331,19 +348,19 @@ So far you have perform SQL Injections that bypass authentication and view data 
 
 2. You will see a misleading message like the following
     
-    ![](./assets/password_changed.png){ width="400" }
+    ![](./lab-guide/docs/assets/password_changed.png){ width="400" }
     
 
 3. Click, the `Back` button
 
 4. In the `Find Users` input field, enter `admin`, then click `Find User` button 
     
-    ![](./assets/empty_users.png){ width="400" }
+    ![](./lab-guide/docs/assets/empty_users.png){ width="400" }
     
 
 5. You have made a SQL Injection attack to delete all users from the database. Thus if you `Logout` and try to login, you will receive the "Login Failed" message. 
     
-    ![](./assets/login_failed.png){ width="400" }
+    ![](./lab-guide/docs/assets/login_failed.png){ width="400" }
     
 
 6. In `app.py`, the following code is executed to update the password. The highlighted line is vulnerable to SQL Injection
@@ -466,7 +483,7 @@ Instead of building SQL queries by concatenating strings, use parameterized quer
 
     You will receive the "Login Failed" message and now your login is protected from SQL Injection attacks
     
-    ![](./assets/login_failed.png){ width="400" }
+    ![](./lab-guide/docs/assets/login_failed.png){ width="400" }
     
 
 
@@ -515,7 +532,7 @@ Let's do the same for the `Find User` logic.
 6. Click Back 
 
 7. Attempt a SQL Injection attack by typing `' OR 1=1--`, then click `Find User`. The expect `No users found` message should appear
-    ![](./assets/empty_users.png){ width="400" }
+    ![](./lab-guide/docs/assets/empty_users.png){ width="400" }
 
 ## Congratulations! 
 You have learned how to exploit and protect SQL Injections one of the most popular vulnerabilities exploited. 
@@ -544,17 +561,17 @@ Before you begin this section,
 ## Step 1: Launch the XSS Lab HTML
 1. In VS Code, right click on the `xss_lab.html`
     
-    ![](./assets/right_click_drop_down.png){ width="400" }
+    ![](./lab-guide/docs/assets/right_click_drop_down.png){ width="400" }
     
 
 2. In the drop down menu, click `Copy Path`, this will copy the file's location url
     
-    ![](./assets/copy_path.png){ width="400" }
+    ![](./lab-guide/docs/assets/copy_path.png){ width="400" }
     
 
 3. Open your web browser of choice and paste the URL in the browser's address bar, then press <kbd>Enter</kbd>
     
-    ![](./assets/dom_xss_app.png){ width="600" }
+    ![](./lab-guide/docs/assets/dom_xss_app.png){ width="600" }
     
 
 ## Step 2: Out-of-the-Box Behavior
@@ -566,7 +583,7 @@ Before exploiting the DOM-Based XSS attack, witness how the application should b
 
 3. You should receive a response below stating, `You entered:` followed by your message
     
-    ![](./assets/dom_xss_expected.png){ width="600" }
+    ![](./lab-guide/docs/assets/dom_xss_expected.png){ width="600" }
     
 
 ## Step 3: Text Style DOM XSS Attack
@@ -579,7 +596,7 @@ Enter the following text in the input box, then press **`Show`**,
 
 - This attack will give you a response with much larger text and the color will be red
     
-    ![](./assets/dom_xss_text_style_attack.png){ width="600" }
+    ![](./lab-guide/docs/assets/dom_xss_text_style_attack.png){ width="600" }
     
 
 ## Step 4: Change Title DOM XSS Attack
@@ -595,17 +612,17 @@ As mentioned above, DOM-Based attacks can alter parts of the page that are alrea
     | Safari            | Right-click anywhere on the page, the click `Inspect Element` _(Developer Tools must be enabled)_ |
 
     
-    ![](./assets/inspect_window.png){ width="600" }
+    ![](./lab-guide/docs/assets/inspect_window.png){ width="600" }
     
 
 2. Click the `Elements` tab
     
-    ![](./assets/inspect_elements_window.png){ width="600" }
+    ![](./lab-guide/docs/assets/inspect_elements_window.png){ width="600" }
     
 
 3. In the code shown, unfold the `<body>` and `<div class="container">` tags by clicking the arrow to the left side of the tag
     
-    ![](./assets/inspect_title_unfold.png){ width="600" }
+    ![](./lab-guide/docs/assets/inspect_title_unfold.png){ width="600" }
     
 
 4. Notice the `<h1>` HTML element for the `Display Your Input` title. Next to the `h1` there is an `id` attribute specified. The `id` value specifies the reference id for the title. 
@@ -626,7 +643,7 @@ As mentioned above, DOM-Based attacks can alter parts of the page that are alrea
     | `.textContent` | Sets the text value to the provided text specified after the `=` sign |
 
     
-    ![](./assets/dom_xss_title_attack.png){ width="600" }
+    ![](./lab-guide/docs/assets/dom_xss_title_attack.png){ width="600" }
     
 
     > **IMPORTANT!** If the `<script>` input did not work for you that is because modern browsers have built-in protections that prevents basic `<script>` injections when inserted into the DOM in certain ways. Especially when inserted dynamically like you are doing for this XSS attack. 
@@ -658,7 +675,7 @@ Enter the following text in the input box, then press **`Show`**,
 ```
 
 
-![](./assets/dom_xss_alert_attack.png){ width="600" }
+![](./lab-guide/docs/assets/dom_xss_alert_attack.png){ width="600" }
 
 
 ## Bonus Challenge
@@ -725,7 +742,7 @@ You have now exploited a DOM-Based XSS attack and its time to see the root cause
     <img src="x" onerror="alert('Web Page Hacked!')"/>
     ```
 
-    ![](./assets/dom_xss_protected.png){ width="600" }
+    ![](./lab-guide/docs/assets/dom_xss_protected.png){ width="600" }
     
 
 ## Congratulations!
@@ -764,12 +781,12 @@ For this section of the lab, you will start the `xss_app.py` to exploit XSS vuln
 3. A Terminal window will appear at the bottom of VS Code, at the project's path.
     - If you already have a Terminal window open and running another application, you can start a new session by clicking the + icon in the Terminal Window toolbar
         
-        ![](./assets/new_vs_terminal_window.png){ width="800" }
+        ![](./lab-guide/docs/assets/new_vs_terminal_window.png){ width="800" }
            
 
     - You should now see multiple terminal sessions that you can switch between sessions
     
-    ![](./assets/vs_multi_terminal.png){ width="800" }
+    ![](./lab-guide/docs/assets/vs_multi_terminal.png){ width="800" }
      
 
 4. Enter the following command to start the Vulnerable XSS web application
@@ -784,7 +801,7 @@ For this section of the lab, you will start the `xss_app.py` to exploit XSS vuln
     http://localhost:8089
     ```
 
-    ![](./assets/xss_web_app.png){ width="600" }
+    ![](./lab-guide/docs/assets/xss_web_app.png){ width="600" }
      
 
 ## Step 2: Out-of-the-Box Behavior
@@ -798,7 +815,7 @@ Under the XSS Reflected section, type any text in the textbox and press **`Post 
 
 3. You should receive a response below stating, `You comment:` followed by your message
     
-    ![](./assets/xss_reflected_normal.png){ width="600" }
+    ![](./lab-guide/docs/assets/xss_reflected_normal.png){ width="600" }
      
 
 ## Step 3: Text Style Reflected XSS Attack
@@ -812,7 +829,7 @@ Enter the following text in the input box, then press **`Post Comment`**,
 - This attack will give you a response with much larger text and the color will be green
 
 
-![](./assets/xss_reflected_style_attack.png){ width="600" }
+![](./lab-guide/docs/assets/xss_reflected_style_attack.png){ width="600" }
  
 
 ## Step 4: Change Title Reflected XSS Attack
@@ -827,17 +844,17 @@ Like other XSS Attacks, Reflected XSS attacks can alter parts of the page that a
     | Microsoft Edge    | Right-click anywhere on the page, then click `Inspect`        |
     | Safari            | Right-click anywhere on the page, the click `Inspect Element` _(Developer Tools must be enabled)_ |
     
-    ![](./assets/xss_reflected_inspect_window.png){ width="600" }
+    ![](./lab-guide/docs/assets/xss_reflected_inspect_window.png){ width="600" }
     
 
 2. Click the `Elements` tab
     
-    ![](./assets/inspect_elements_window.png){ width="600" }
+    ![](./lab-guide/docs/assets/inspect_elements_window.png){ width="600" }
     
 
 3. In the code shown, unfold the `<body>` and `<div class="container">` tags by clicking the arrow to the left side of the tag
     
-    ![](./assets/xss_reflected_inspect_title.png){ width="600" }
+    ![](./lab-guide/docs/assets/xss_reflected_inspect_title.png){ width="600" }
     
 
 4. Notice the `<h2>` HTML element for the `XSS Reflected` title. Next to the `h2` there is an `id` attribute specified. The `id` value specifies the reference id for the title. 
@@ -860,7 +877,7 @@ Like other XSS Attacks, Reflected XSS attacks can alter parts of the page that a
     | `color` | Sets the text color to the provided value specified after the `=` sign |
 
     
-    ![](./assets/xss_reflected_title_attack.png){ width="600" }
+    ![](./lab-guide/docs/assets/xss_reflected_title_attack.png){ width="600" }
     
 
 6. Reflected XSS attacks are not persistent attacks so the moment the moment the page reloads all changes revert back to normal.
@@ -877,7 +894,7 @@ Enter the following text in the input box, then press **`Post Comment`**,
 ```
 
 
-![](./assets/xss_reflected_alert_attack.png){ width="600" }
+![](./lab-guide/docs/assets/xss_reflected_alert_attack.png){ width="600" }
 
 
 ## Bonus Challenge
@@ -1001,7 +1018,7 @@ It's time to see the root cause of these attacks and how to protect against thes
     <script>alert('Web Page Hacked!')</script>
     ```
     
-    ![](./assets/xss_reflected_protected.png){ width="600" }
+    ![](./lab-guide/docs/assets/xss_reflected_protected.png){ width="600" }
     
 
 ## Congratulations!
@@ -1048,12 +1065,12 @@ For this section of the lab, you will start the `xss_app.py` to exploit XSS vuln
 3. A Terminal window will appear at the bottom of VS Code, at the project's path.
     - If you already have a Terminal window open and running another application, you can start a new session by clicking the + icon in the Terminal Window toolbar
         
-        ![](./assets/new_vs_terminal_window.png){ width="800" }
+        ![](./lab-guide/docs/assets/new_vs_terminal_window.png){ width="800" }
            
 
     - You should now see multiple terminal sessions that you can switch between sessions
     
-    ![](./assets/vs_multi_terminal.png){ width="800" }
+    ![](./lab-guide/docs/assets/vs_multi_terminal.png){ width="800" }
      
 
 4. Enter the following command to start the Vulnerable XSS web application
@@ -1068,7 +1085,7 @@ For this section of the lab, you will start the `xss_app.py` to exploit XSS vuln
     http://localhost:8089
     ```
     
-    ![](./assets/xss_web_app.png){ width="600" }
+    ![](./lab-guide/docs/assets/xss_web_app.png){ width="600" }
      
 
 ## Step 2: Out-of-the-Box Behavior
@@ -1080,7 +1097,7 @@ Before exploiting the Stored XSS attack, witness how the application should beha
 
 3. You should be able to see your text in the table below the `Post Comment` button
     
-    ![](./assets/xss_stored_normal.png){ width="600" }
+    ![](./lab-guide/docs/assets/xss_stored_normal.png){ width="600" }
      
 
 ## Step 3: Text Style Stored XSS Attack
@@ -1092,7 +1109,7 @@ Now that you see how the application should behave when entering in a message, a
     ```
 
     
-    ![](./assets/xss_stored_style_attack.png){ width="600" }
+    ![](./lab-guide/docs/assets/xss_stored_style_attack.png){ width="600" }
      
 
     - This attack will store the text in a much larger font size and the color of it will be green
@@ -1115,7 +1132,7 @@ Now that you see how the application should behave when entering in a message, a
 
 4. As you will see even in this completely new browser session the XSS attack is still present
     
-    ![](./assets/xss_stored_style_attack_incognito.png){ width="600" }
+    ![](./lab-guide/docs/assets/xss_stored_style_attack_incognito.png){ width="600" }
      
 
 ## Step 4: Change Title Stored XSS Attack
@@ -1131,17 +1148,17 @@ Like other XSS Attacks, Stored XSS attacks can alter parts of the page that are 
     | Safari            | Right-click anywhere on the page, the click `Inspect Element` _(Developer Tools must be enabled)_ |
 
     
-    ![](./assets/xss_reflected_inspect_window.png){ width="600" }
+    ![](./lab-guide/docs/assets/xss_reflected_inspect_window.png){ width="600" }
     
 
 2. Click the `Elements` tab
     
-    ![](./assets/inspect_elements_window.png){ width="600" }
+    ![](./lab-guide/docs/assets/inspect_elements_window.png){ width="600" }
     
 
 3. In the code shown, unfold the `<body>` and `<div class="container">` tags by clicking the arrow to the left side of the tag
     
-    ![](./assets/xss_Stored_inspect_title.png){ width="600" }
+    ![](./lab-guide/docs/assets/xss_Stored_inspect_title.png){ width="600" }
     
 
 4. Notice the `<h2>` HTML element for the `XSS Stored` title. Next to the `h2` there is an `id` attribute specified. The `id` value specifies the reference id for the title. 
@@ -1164,7 +1181,7 @@ Like other XSS Attacks, Stored XSS attacks can alter parts of the page that are 
     | `color` | Sets the text color to the provided value specified after the `=` sign |
 
     
-    ![](./assets/xss_stored_title_attack.png){ width="600" }
+    ![](./lab-guide/docs/assets/xss_stored_title_attack.png){ width="600" }
     
 
 6. Stored XSS attacks are persistent so every user will see the new title when they visit the web page.
@@ -1176,7 +1193,7 @@ Like other XSS Attacks, Stored XSS attacks can alter parts of the page that are 
 
     > **Note**: It's important to note that each post is a form submission. If the page is refreshed by clicking the browser's reload button, the browser tries to reload the last request made which in this case is the form submission. 
     
-    ![](./assets/xss_stored_title_attack_incognito.png){ width="600" }
+    ![](./lab-guide/docs/assets/xss_stored_title_attack_incognito.png){ width="600" }
     
 
 
@@ -1188,7 +1205,7 @@ In this attack, you will change the way the application behaves when posting a c
     <script>alert("Web Paged Hacked!")</script>
     ```
     
-    ![](./assets/xss_reflected_alert_attack.png){ width="600" }
+    ![](./lab-guide/docs/assets/xss_reflected_alert_attack.png){ width="600" }
     
 
 2. Open a new private browser window
@@ -1199,14 +1216,14 @@ In this attack, you will change the way the application behaves when posting a c
 
     - The alert will display every time you refresh the page by just clicking in the browser address bar and pressing <kbd>Enter</kbd> or closing the browser and navigating to the XSS Vulnerable web page again
 
-    ![](./assets/xss_stored_alert_attack_incognito.png){ width="600" }
+    ![](./lab-guide/docs/assets/xss_stored_alert_attack_incognito.png){ width="600" }
     
 
 4. To stop the alert from showing, click the **`Reset Data` button to delete all stored comments. These will reset everything back to normal.
     
-    ![](./assets/xss_stored_reset_btn.png){ width="600" }
+    ![](./lab-guide/docs/assets/xss_stored_reset_btn.png){ width="600" }
     
-    ![](./assets/xss_stored_restored.png){ width="600" }
+    ![](./lab-guide/docs/assets/xss_stored_restored.png){ width="600" }
     
 
 ## Bonus Stored XSS Attack Challenge
@@ -1309,7 +1326,7 @@ It's time to see the root cause of these attacks and how to protect against thes
     <script>document.getElementById('storedTitle').textContent='New XSS Title';document.getElementById('storedTitle').style.color='red'</script>
     ```
 
-    ![](./assets/xss_stored_protected.png){ width="600" }
+    ![](./lab-guide/docs/assets/xss_stored_protected.png){ width="600" }
     
 
 ## Bonus Protection Challenge
@@ -1356,7 +1373,7 @@ First, login to the Vulnerable Web Application. This vulnerability relies on an 
 
 1. Navigate to the Vulnerable Web Application by clicking this hyperlink [http://localhost:8088](http://localhost:8088) or by typing this url in your Web Browser of choice
     
-    ![](./assets/web_app.png){ width="400" }
+    ![](./lab-guide/docs/assets/web_app.png){ width="400" }
     
 
 2. Provide one of the following credentials to login to the application
@@ -1367,7 +1384,7 @@ First, login to the Vulnerable Web Application. This vulnerability relies on an 
         - **Username**: `user`
         - **Password**: `pass`
     
-    ![](./assets/web_app_dashboard.png){ width="400" }
+    ![](./lab-guide/docs/assets/web_app_dashboard.png){ width="400" }
     
 
 ## Step 2: Out-of-the-Box Behavior
@@ -1377,7 +1394,7 @@ To ensure the application does what you would like it to do, change the password
 
 2. Click **`Change Password`**
     
-    ![](./assets/password_changed.png){ width="400" }
+    ![](./lab-guide/docs/assets/password_changed.png){ width="400" }
     
 3. Verify the password has been changed for the logged in user
     - Click the `<- Back` button
@@ -1389,7 +1406,7 @@ CSRF attacks usually will begin with some sort of phishing attempt like an email
 
 1. In VS Code, Click any where in an open area of the Explorer pane, then click the new file icon, name the file `csrf_attack.html`.
     
-    ![](./assets/vs_new_file.png){ width="300" }
+    ![](./lab-guide/docs/assets/vs_new_file.png){ width="300" }
     
 2. Create the foundational elements of an HTML file
     ```html 
@@ -1451,12 +1468,12 @@ CSRF attacks usually will begin with some sort of phishing attempt like an email
 
     - Click the `Elements` tab
         
-        ![](./assets/inspect_elements_window.png){ width="600" }
+        ![](./lab-guide/docs/assets/inspect_elements_window.png){ width="600" }
         
 
     - In the code shown, unfold the `<body>`, `<div class="container">`, then `<form action="/change_password" method="post">` tags by clicking the arrow to the left side of the tag
         
-        ![](./assets/csrf_inspect_form.png){ width="600" }
+        ![](./lab-guide/docs/assets/csrf_inspect_form.png){ width="600" }
         
 
     - Notice the `<input type="text" name="new_password" placeholder="New Password">`. The `name` is what binds the text you put in the textbox to the HTTP request to change the password. You will use the `name` value `new_password` in your `csrf_attack.html`
@@ -1577,12 +1594,12 @@ CSRF attacks usually will begin with some sort of phishing attempt like an email
 
 1. In VS Code, right click on the `csrf_attack.html`
     
-    ![](./assets/csrf_rc_drop_down.png){ width="400" }
+    ![](./lab-guide/docs/assets/csrf_rc_drop_down.png){ width="400" }
     
 
 2. In the drop down menu, click `Copy Path`, this will copy the file's location url
     
-    ![](./assets/copy_path.png){ width="400" }
+    ![](./lab-guide/docs/assets/copy_path.png){ width="400" }
     
 
 3. Ensure you are logged into [http://localhost:8088](http://localhost:8088)
@@ -1599,18 +1616,18 @@ CSRF attacks usually will begin with some sort of phishing attempt like an email
 
 5. Paste in the URL/Path that was copied from VS Code, then press <kbd>Enter</kbd>. The page should be redirected to the expected `Password Changed` webpage
     
-    ![](./assets/password_changed.png){ width="400" }
+    ![](./lab-guide/docs/assets/password_changed.png){ width="400" }
     
 
 6. Verify that the password has indeed changed for the user that was logged in
     - Click on the `User Dashboard` browser tab, then `Logout`
     - Try logging into the application with the expected password
         
-        ![](./assets/login_failed.png){ width="400" }
+        ![](./lab-guide/docs/assets/login_failed.png){ width="400" }
         
     - Now try logging in with the password you set in the `csrf_attack.html`
         
-        ![](./assets/web_app_dashboard.png){ width="400" }
+        ![](./lab-guide/docs/assets/web_app_dashboard.png){ width="400" }
         
 
 ## Step 5: Protect Against CSRF Vulnerabilities 
@@ -1838,12 +1855,12 @@ In this lab to protect against CSRF, the following steps will guide you through 
 
 3. In VS Code, right click on the `csrf_attack.html`
     
-    ![](./assets/csrf_rc_drop_down.png){ width="400" }
+    ![](./lab-guide/docs/assets/csrf_rc_drop_down.png){ width="400" }
     
 
 4. In the drop down menu, click `Copy Path`, this will copy the file's location url
     
-    ![](./assets/copy_path.png){ width="400" }
+    ![](./lab-guide/docs/assets/copy_path.png){ width="400" }
     
 
 5. Open a new browser tab in the same browser window
@@ -1852,18 +1869,18 @@ In this lab to protect against CSRF, the following steps will guide you through 
 
 5. Paste in the URL/Path that was copied from VS Code, then press <kbd>Enter</kbd>. You should receive `Invalid CSRF token!`
     
-    ![](./assets/csrf_invalid_token.png){ width="400" }
+    ![](./lab-guide/docs/assets/csrf_invalid_token.png){ width="400" }
     
 
 6. Verify that the password has **not** changed for the user that was logged in
     - Click on the `User Dashboard` browser tab, then `Logout`
     - Try logging into the application with the password you set in the `csrf_attack.html`
         
-        ![](./assets/login_failed.png){ width="400" }
+        ![](./lab-guide/docs/assets/login_failed.png){ width="400" }
         
     - Now try logging in with the original password
         
-        ![](./assets/web_app_dashboard.png){ width="400" }
+        ![](./lab-guide/docs/assets/web_app_dashboard.png){ width="400" }
         
 
 ### Bonus Challenge

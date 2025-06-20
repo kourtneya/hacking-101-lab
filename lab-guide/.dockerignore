@@ -1,0 +1,9 @@
+.github/
+assets/
+.gitignore
+app.py
+README.md 
+requirements.txt
+xss_app.py
+xss_lab.html
+database.db
